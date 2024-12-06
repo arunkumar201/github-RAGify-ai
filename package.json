@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preinstall": "npx prisma generate",
+    "postinstall": "prisma generate"
+    
   },
   "dependencies": {
     "@clerk/nextjs": "^6.5.1",
