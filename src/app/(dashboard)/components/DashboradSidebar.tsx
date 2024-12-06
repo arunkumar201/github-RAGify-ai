@@ -3,6 +3,7 @@
 import {
 	Sidebar,
 	SidebarContent,
+	SidebarFooter,
 	SidebarHeader,
 	SidebarMenu,
 	SidebarMenuItem,
@@ -58,20 +59,22 @@ export const DashboardSidebar = () => {
 			<SidebarContent className="flex flex-col">
 				<SidebarSection
 					title="Application"
-					icon={<House className="" size={29} />}
+					icon={<House className="" size={20} />}
 					options={appOptions}
 					pathname={pathname}
 				/>
 				<SidebarSection
 					title="Your Projects"
-					icon={<User2Icon size={29} className="" />}
+					icon={<User2Icon size={20} />}
 					options={porjects}
 					pathname={pathname}
 					isProject={true}
 				/>
+			</SidebarContent>
+			<SidebarFooter>
 				<SidebarSection
-					title="Settings"
-					icon={<SettingsIcon className="" size={29} />}
+					title="My Settings"
+					icon={<SettingsIcon className="" size={20} />}
 					options={settingsOptions}
 					pathname={pathname}
 				/>
@@ -91,7 +94,7 @@ export const DashboardSidebar = () => {
 						</SidebarMenuItem>
 					</SidebarMenu>
 				)}
-			</SidebarContent>
+			</SidebarFooter>
 		</Sidebar>
 	);
 };
