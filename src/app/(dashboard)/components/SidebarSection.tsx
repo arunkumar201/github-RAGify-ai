@@ -42,14 +42,14 @@ export const SidebarSection = ({
 				<SidebarMenu>
 					{options.map((option) => (
 						<SidebarMenuItem key={option.path}>
-							<SidebarMenuButton asChild>
+							<SidebarMenuButton asChild tooltip={option.title}>
 								{!isProject ? (
 									<Link
 										href={option.path}
 										className={cn(
-											"bg-primary-foreground text-primary hover:bg-primary/40 p-3",
+											"hover:dark:bg-slate-500 hover:bg-slate-200 text-zinc-500 dark:text-zinc-200",
 											pathname === option.path &&
-												"bg-primary text-primary-foreground hover:bg-primary/50"
+												"hover:bg-blue-600 hover:dark:text-slate-200 hover:text-slate-200 bg-primary dark:text-slate-50 text-primary-foreground hover:dark:bg-primary/90"
 										)}
 									>
 										{option.icon}
@@ -59,16 +59,16 @@ export const SidebarSection = ({
 									<Link
 										href={option.path}
 										className={cn(
-											"bg-primary-foreground text-primary hover:bg-primary/40",
+											"hover:dark:bg-slate-500 hover:bg-slate-200",
 											pathname === option.path &&
-												"bg-primary text-primary-foreground hover:bg-primary/50",
+												"hover:bg-blue-600 hover:dark:text-slate-200 hover:text-slate-200 bg-primary dark:text-slate-50 text-primary-foreground hover:dark:bg-primary/90",
 											!open && "bg"
 										)}
 									>
 										<div className={cn("rounded-full")}>
 											{getShortTitle(option.title)}
 										</div>
-										<span className="md:text-lg text-base">{option.title}</span>
+										<span>{option.title}</span>
 									</Link>
 								)}
 							</SidebarMenuButton>

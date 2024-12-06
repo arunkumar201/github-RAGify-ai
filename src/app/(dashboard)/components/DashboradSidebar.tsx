@@ -50,7 +50,7 @@ export const DashboardSidebar = () => {
 			<SidebarHeader className="flex flex-row items-center gap-x-2 p-3">
 				<Image src={logo} alt="Logo" width={30} height={30} className="" />
 				{open && (
-					<h1 className="text-base md:text-lg font-bold dark:text-accent text-accent-foreground capitalize">
+					<h1 className="text-base md:text-lg font-bold text-sidebar-accent-foreground datk:text-accent capitalize">
 						github-RAGify-ai
 					</h1>
 				)}
@@ -58,35 +58,20 @@ export const DashboardSidebar = () => {
 			<SidebarContent className="flex flex-col">
 				<SidebarSection
 					title="Application"
-					icon={
-						<House
-							className="dark:text-secondary text-secondary-foreground"
-							size={22}
-						/>
-					}
+					icon={<House className="" size={29} />}
 					options={appOptions}
 					pathname={pathname}
 				/>
 				<SidebarSection
 					title="Your Projects"
-					icon={
-						<User2Icon
-							size={22}
-							className="dark:text-secondary text-secondary-foreground"
-						/>
-					}
+					icon={<User2Icon size={29} className="" />}
 					options={porjects}
 					pathname={pathname}
 					isProject={true}
 				/>
 				<SidebarSection
 					title="Settings"
-					icon={
-						<SettingsIcon
-							className="dark:text-secondary text-secondary-foreground"
-							size={22}
-						/>
-					}
+					icon={<SettingsIcon className="" size={29} />}
 					options={settingsOptions}
 					pathname={pathname}
 				/>

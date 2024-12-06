@@ -4,7 +4,6 @@ import {
 	CreditCard,
 	LayoutDashboard,
 	Presentation,
-	House,
 	SettingsIcon,
 } from "lucide-react";
 
@@ -23,11 +22,6 @@ export const DASHBOARD_APPLICATION_OPTIONS = [
 		title: "Meetings",
 		path: "/dashboard/meetings",
 		icon: <Presentation />,
-	},
-	{
-		title: "Home",
-		path: "/home",
-		icon: <House />,
 	},
 ];
 
