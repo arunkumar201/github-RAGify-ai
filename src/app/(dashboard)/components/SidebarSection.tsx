@@ -47,7 +47,7 @@ export const SidebarSection = ({
 										className={cn(
 											"hover:dark:bg-slate-500 hover:bg-slate-200 text-zinc-500 dark:text-zinc-200",
 											pathname === option.path &&
-												"hover:bg-blue-600 hover:dark:text-slate-200 hover:text-slate-200 bg-primary dark:text-slate-50 text-primary-foreground hover:dark:bg-primary/90"
+												"hover:dark:text-slate-200 hover:hover:bg-blue-600 hover:text-slate-200 bg-primary dark:text-slate-50 text-primary-foreground hover:dark:bg-primary/90"
 										)}
 									>
 										{option.icon}
