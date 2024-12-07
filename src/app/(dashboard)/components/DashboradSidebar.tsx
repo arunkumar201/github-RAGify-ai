@@ -71,7 +71,7 @@ export const DashboardSidebar = () => {
 					isProject={true}
 				/>
 			</SidebarContent>
-			<SidebarFooter>
+			<SidebarFooter className="flex flex-col gap-2 p-0">
 				<SidebarSection
 					title="My Settings"
 					icon={<SettingsIcon className="" size={20} />}
