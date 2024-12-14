@@ -21,6 +21,7 @@ export default async function SyncUserPage() {
 			firstName: user.firstName,
 			lastName: user.lastName,
 			imageUrl: user.imageUrl,
+			id: userId,
 		},
 		update: {
 			firstName: user.firstName,

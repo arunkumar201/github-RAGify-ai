@@ -1,5 +1,11 @@
+import { CreateProject } from "../../components/CreateProject";
+
 const DashboardProjectsPage = () => {
-	return <h1>dashboard projects page</h1>;
+	return (
+		<>
+			<CreateProject />
+		</>
+	);
 };
 
 export default DashboardProjectsPage;

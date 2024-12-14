@@ -18,10 +18,26 @@ model User {
   email     String  @unique
   firstName String?
   lastName  String?
+  projects  Project[]
 
   imageUrl String?
   credits  Int     @default(150)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Project{
+  id        String  @id @default(cuid())
+  name      String
+  githubUrl String
+  description String?
+  deletedAt DateTime?
+  userId     String
+  user      User    @relation(fields: [userId], references: [id])
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
 }
