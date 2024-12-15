@@ -10,10 +10,14 @@ import { FolderDot, GithubIcon, KeyRound } from "lucide-react";
 import { ZodError } from "zod";
 import { createProjectAction } from "@/actions";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export const CreateProject = () => {
 	const { register, handleSubmit, reset } = useForm<TCreateProjectForm>();
 	const [isCreating, setIsCreating] = useState(false);
+	const queryClient = useQueryClient();
+	const router = useRouter();
 
 	const onSubmit = async (data: TCreateProjectForm) => {
 		setIsCreating(true);
@@ -21,8 +25,12 @@ export const CreateProject = () => {
 			const parseCreateProject = await ZCreateProjectForm.parseAsync(data);
 			console.log("Parsed data:", parseCreateProject.githubUrl);
 			const response = await createProjectAction(parseCreateProject);
-			console.log("Response:", response);
 			toast.success(response.message);
+			console.log("Response:", response);
+			router.push(`/dashboard/projects/${response.data.projectId}`);
+			await queryClient.invalidateQueries({
+				queryKey: ["projects"],
+			});
 		} catch (error) {
 			if (error instanceof ZodError) {
 				const errors = error.errors.map((err) => err);

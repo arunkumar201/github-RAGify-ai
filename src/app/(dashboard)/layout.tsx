@@ -12,6 +12,7 @@ export default async function DashboardLayout({
 }) {
 	const cookieStore = await cookies();
 	const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
+
 	return (
 		<>
 			<SidebarProvider defaultOpen={defaultOpen}>
@@ -22,7 +23,7 @@ export default async function DashboardLayout({
 						<div className="ml-auto"></div>
 						<div className="flex flex-row items-center gap-2">
 							<ThemeModeToggle />
-							<UserButton/>
+							<UserButton />
 						</div>
 					</div>
 					<div className="h-5"></div>

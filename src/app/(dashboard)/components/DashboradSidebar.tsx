@@ -20,31 +20,20 @@ import { SidebarSection } from "./SidebarSection";
 import { Button } from "@/components/ui/button";
 import logo from "@/../public/logo.png";
 import Image from "next/image";
+import { Project } from "@prisma/client";
+import { useProject } from "@/hooks/use-project";
+
+export interface SidebarSectionProps {
+	projects: Promise<{
+		data: Project[];
+		message: string;
+	}>;
+}
 
 export const DashboardSidebar = () => {
 	const pathname = usePathname();
 	const { open } = useSidebar();
-
-	const porjects = [
-		{
-			title: "Project 1",
-			path: "/dashboard/projects/1",
-			icon: <SettingsIcon size={24} />,
-			id: "2",
-		},
-		{
-			title: "Project 2",
-			path: "/dashboard/projects/2",
-			icon: <SettingsIcon size={24} />,
-			id: "3",
-		},
-		{
-			title: "Project 3",
-			path: "/dashboard/projects/3",
-			icon: <SettingsIcon size={24} />,
-			id: "4",
-		},
-	];
+	const { data: userProjects, isError, isLoading } = useProject();
 
 	return (
 		<Sidebar variant="floating" collapsible={"icon"}>
@@ -66,9 +55,11 @@ export const DashboardSidebar = () => {
 				<SidebarSection
 					title="Your Projects"
 					icon={<User2Icon size={20} />}
-					options={porjects}
+					options={userProjects ?? []}
 					pathname={pathname}
 					isProject={true}
+					isLoading={isLoading}
+					isError={isError}
 				/>
 			</SidebarContent>
 			<SidebarFooter className="flex flex-col gap-2 p-0">
@@ -82,7 +73,7 @@ export const DashboardSidebar = () => {
 					<SidebarMenu className="flex flex-col gap-2 p-2">
 						<SidebarMenuItem className="w-full">
 							{/* Create Project Button  - dashboard/projects/new/id */}
-							<Link href="/dashboard/projects">
+							<Link href="/dashboard/create-project">
 								<Button
 									variant={"outline"}
 									className="w-full rounded-sm flex flex-row gap-2"

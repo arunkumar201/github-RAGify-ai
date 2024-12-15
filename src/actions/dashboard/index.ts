@@ -43,11 +43,38 @@ export const createProjectAction = async (data: TCreateProjectForm) => {
 		} else if (error instanceof Prisma.PrismaClientKnownRequestError) {
 			console.error(
 				"PrismaClientKnownRequestError in createProjectAction:",
-				error.code 
+				error.code
 			);
 			const errorMessages = getPrismaErrorByCode(error.code);
 			throw new Error(errorMessages);
 		}
 		throw new Error(`Unexpected error: ${(error as Error).message}`);
+	}
+};
+
+export const getAllUserProjectsAction = async () => {
+	try {
+		const userAuth = await auth();
+
+		if (!userAuth.userId) {
+			throw new Error("User not authenticated. Please sign in first.");
+		}
+
+		const projects = await prisma.project.findMany({
+			where: {
+				userId: userAuth.userId,
+			},
+			orderBy: {
+				createdAt: "desc",
+			},
+		});
+
+		return {
+			message: "Projects fetched successfully!",
+			data: projects,
+		};
+	} catch (error: unknown) {
+		console.error("Error in getAllUserProjectsAction:", error);
+		throw new Error("Failed to fetch projects. Please try again later.");
 	}
 };

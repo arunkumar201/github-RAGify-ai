@@ -6,3 +6,14 @@ export const getShortTitle = (title: string) => {
 	}
 	return words[0].slice(0, 2);
 };
+
+export const wait = (sec: number) =>
+	new Promise((resolve) => setTimeout(resolve, sec * 1000));
+
+export const fetcher = async (url: string) => {
+	const response = await fetch(url);
+	if (!response.ok) {
+		throw new Error("Network response was not ok");
+	}
+	return await response.json();
+};
