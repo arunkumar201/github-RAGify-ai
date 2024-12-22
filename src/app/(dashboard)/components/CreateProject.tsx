@@ -27,10 +27,10 @@ export const CreateProject = () => {
 			const response = await createProjectAction(parseCreateProject);
 			toast.success(response.message);
 			console.log("Response:", response);
-			router.push(`/dashboard/projects/${response.data.projectId}`);
 			await queryClient.invalidateQueries({
 				queryKey: ["projects"],
 			});
+			router.push(`/dashboard/projects/${response.data.projectId}`);
 		} catch (error) {
 			if (error instanceof ZodError) {
 				const errors = error.errors.map((err) => err);

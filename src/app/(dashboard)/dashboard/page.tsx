@@ -1,12 +1,20 @@
 import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { ProjectOverview } from "../components/ProjectOverview";
 
 const DashboardPage = async () => {
 	const user = await currentUser();
-	console.log("User:", user);
+
+	if (!user) {
+		return redirect("/signin");
+	}
+
 	return (
 		<div>
 			<h1>Welcome to your dashboard</h1>
-			<p>Logged in as: {user?.emailAddresses[0].emailAddress}</p>
+			<ProjectOverview
+				githubRepoUrl="https://github.com/arunkumar201/github-RAGify-ai"
+			/>
 		</div>
 	);
 };

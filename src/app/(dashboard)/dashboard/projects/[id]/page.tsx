@@ -12,5 +12,4 @@ const DashboardProjectPage = async ({ params }: IDashboardProjectPage) => {
 		</>
 	);
 };
-
 export default DashboardProjectPage;

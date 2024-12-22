@@ -13,6 +13,7 @@ import { revalidateTag, unstable_cache } from "next/cache";
 import { CACHE_TIME } from "..";
 
 export const createProjectAction = async (data: TCreateProjectForm) => {
+	let project;
 	try {
 		const userAuth = await auth();
 		if (!userAuth.userId) {
@@ -23,7 +24,7 @@ export const createProjectAction = async (data: TCreateProjectForm) => {
 		console.log("Parsed data:", parseCreateProject);
 
 		//save it to database
-		const project = await prisma.project.create({
+		project = await prisma.project.create({
 			data: {
 				name: parseCreateProject.projectName,
 				githubUrl: parseCreateProject.githubUrl,
