@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest",
     "preinstall": "npx prisma generate",
     "postinstall": "prisma generate"
   },
@@ -42,15 +43,21 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
     "@types/node": "^20",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
+    "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
+    "jsdom": "^25.0.1",
     "postcss": "^8",
     "prisma": "^6.0.0",
     "tailwindcss": "^3.4.1",
     "tailwindcss-motion": "^1.0.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^2.1.8"
   }
 }
