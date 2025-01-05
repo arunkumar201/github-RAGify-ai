@@ -14,8 +14,8 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(cuid())
-  email     String  @unique
+  id        String    @id @default(cuid())
+  email     String    @unique
   firstName String?
   lastName  String?
   projects  Project[]
@@ -27,17 +27,34 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model Project{
-  id        String  @id @default(cuid())
-  name      String
-  githubUrl String
+model Project {
+  id          String    @id @default(cuid())
+  name        String
+  githubUrl   String
   description String?
-  deletedAt DateTime?
-  userId     String
-  user      User    @relation(fields: [userId], references: [id])
-
+  deletedAt   DateTime?
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
+  Commit Commit[]
+}
+
+model Commit {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+
+  commitHash         String
+  commitMessage      String
+  commitAuthorName   String
+  commitAuthorEmail  String
+  commitAuthorAvatar String
+  commitDate         DateTime
+  summary            String
 }

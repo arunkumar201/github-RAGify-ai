@@ -11,6 +11,7 @@ import { ZodError } from "zod";
 import { getPrismaErrorByCode } from "../utils/prisma-utils";
 import { revalidateTag, unstable_cache } from "next/cache";
 import { CACHE_TIME } from "..";
+import { pullCommits } from "@/lib/github";
 
 export const createProjectAction = async (data: TCreateProjectForm) => {
 	let project;
@@ -21,7 +22,6 @@ export const createProjectAction = async (data: TCreateProjectForm) => {
 		}
 
 		const parseCreateProject = await ZCreateProjectForm.parseAsync(data);
-		console.log("Parsed data:", parseCreateProject);
 
 		//save it to database
 		project = await prisma.project.create({
@@ -31,6 +31,7 @@ export const createProjectAction = async (data: TCreateProjectForm) => {
 				userId: userAuth.userId,
 			},
 		});
+		await pullCommits(project.id);
 
 		revalidateTag(`user-${userAuth.userId}`);
 
@@ -87,6 +88,36 @@ export const getAllUserProjectsAction = async () => {
 		[`all-projects-user-${userAuth.userId}`],
 		{
 			tags: [`user-${userAuth.userId}`],
+			revalidate: CACHE_TIME,
+		}
+	)();
+};
+
+export const pullCommitsAction = async (projectId: string) => {
+	const userAuth = await auth();
+	if (!userAuth.userId) {
+		throw new Error("User not authenticated. Please sign in first.");
+	}
+	return unstable_cache(
+		async () => {
+			try {
+				const commits = await prisma.commit.findMany({
+					where: {
+						projectId,
+					},
+				});
+				return {
+					message: "Commits pulled successfully!",
+					data: commits,
+				};
+			} catch (error: unknown) {
+				console.error("Error in pullCommitsAction:", error);
+				throw new Error("Failed to pull commits. Please try again later.");
+			}
+		},
+		[`pull-commits-${projectId}`],
+		{
+			tags: [`project-${projectId}`],
 			revalidate: CACHE_TIME,
 		}
 	)();
